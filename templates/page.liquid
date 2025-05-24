@@ -1,0 +1,158 @@
+{% assign pages = site.pages['/'].children_in_nav_menu %}
+
+
+<!-- ========== MAIN CONTENT ========== -->
+
+<div class="mx-auto max-w-7xl">
+  <div class="p-6 md:flex md:space-x-12 md:px-12 md:py-12 min-h-[calc(100vh-143px)]">
+    <nav class="fixed hidden h-full w-full flex-shrink-0 pb-6 md:block md:w-52 md:pb-12 top-[124px] overflow-scroll max-h-screen">
+      <div>
+        <h1 class="h1 text-3xl mb-2 flex">
+          {% if page.settings.icon_url %}
+            <span class="p-2 bg-gray-200 rounded-md mr-2">
+              <img src="{{ page.settings.icon_url }}" alt="Icon" class="h-8 w-8">
+            </span>
+          {% endif %}
+          {{ page.settings.title }}</h1>
+        <hr/>
+        <div class="py-6">
+          <div class="flex flex-col items-center">
+            
+            {% if page.settings.logo_url %}
+              <img src="{{ page.settings.logo_url }}" alt="Logo" class="">
+            {% endif %}
+          </div>
+        </div>
+        <a href="{{ page.settings.domain }}" rel="noopener noreferrer" target="_blank"
+          class="flex items-center py-0.5 text-gray-700 hover:text-indigo-700">{{ page.settings.domain }}
+          <svg
+            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
+            data-slot="icon" class="ml-2 h-4 w-4">
+            <path fill-rule="evenodd"
+              d="M15.75 2.25H21a.75.75 0 0 1 .75.75v5.25a.75.75 0 0 1-1.5 0V4.81L8.03 17.03a.75.75 0 0 1-1.06-1.06L19.19 3.75h-3.44a.75.75 0 0 1 0-1.5Zm-10.5 4.5a1.5 1.5 0 0 0-1.5 1.5v10.5a1.5 1.5 0 0 0 1.5 1.5h10.5a1.5 1.5 0 0 0 1.5-1.5V10.5a.75.75 0 0 1 1.5 0v8.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V8.25a3 3 0 0 1 3-3h8.25a.75.75 0 0 1 0 1.5H5.25Z"
+              clip-rule="evenodd"></path>
+          </svg></a>
+        
+      </div>
+    </nav>
+    <main class="w-full md:pl-52">
+      <div class="flex items-start">
+        <div class="w-full max-w-[720px] lg:pr-12">
+          <div class="prose prose-indigo max-w-none prose-h1:font-light prose-h1:text-indigo-700">
+            <p class="text-gray-500">{{ page.settings.description }}</p>
+            <div class="mt-4">
+              {% if page.settings.menus %}
+                <div class="flex flex-wrap gap-2">
+                  {% for menu in page.settings.menus %}
+                    <a href="{{ menu.url }}" class="text-indigo-700 hover:text-indigo-900">{{ menu.name }}</a>
+                  {% endfor %}
+                </div>
+              {% endif %}
+              {{ page.settings.content }}
+            </div>
+            <div class="mt-4 ProseMirror">
+              {% if page.settings.screenshot_url %}
+                <img src="{{ page.settings.screenshot_url }}" alt="Screenshot" class="w-full h-auto">
+              {% endif %}
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+<!-- ========== END SECONDARY CONTENT ========== -->
+
+<!--/ article-->
+{% schema %}
+    {
+    "name": "Page",
+    "thumb_url": "images/theme/page.png",
+    "description": "公司/产品模板，固定的布局",
+    "sub_page_templates": ["post"],
+    "settings": [
+        {
+          "id": "title",
+          "type": "text",
+          "placeholder": "",
+          "label": "标题",
+          "info": "显示在正文上方的文章标题"
+        },
+        {
+          "id": "domain",
+          "type": "text",
+          "placeholder": "",
+          "label": "域名",
+          "info": "https://example.com"
+        },
+        {
+          "id": "description",
+          "type": "textarea",
+          "placeholder": "",
+          "label": "描述",
+          "info": "简短描述"
+        },
+        {
+          "id": "region_tags",
+          "type": "tag_picker",
+          "multiple": true,
+          "label": "标签"
+        },
+        {
+          "id": "country_tags",
+          "type": "tag_picker",
+          "multiple": true,
+          "label": "标签"
+        },
+        {
+          "id": "country_tags",
+          "type": "tag_picker",
+          "multiple": true,
+          "label": "标签"
+        },
+        {
+          "id": "industry_tags",
+          "type": "tag_picker",
+          "multiple": true,
+          "label": "标签"
+        },
+        {
+          "id": "icon_url",
+          "type": "image_picker",
+          "label": "图标地址",
+          "info": "显示在正文上方的文章图标地址"
+        },
+        {
+          "id": "logo_url",
+          "type": "image_picker",
+          "label": "Logo地址",
+          "info": "显示在正文上方的文章Logo地址"
+        },
+        {
+          "id": "screenshot_url",
+          "type": "image_picker",
+          "label": "截图地址",
+          "info": ""
+        },
+        {
+          "id": "content",
+          "type": "richtext",
+          "label": "页面内容"
+        },
+        {
+          "id": "menus",
+          "type": "textarea",
+          "label": "导航菜单"
+        },
+        {
+          "id": "rating",
+          "type": "number",
+          "label": "评分",
+          "min": "0",
+          "max": "10",
+          "step": "0.5",
+          "default": "5",
+          "info": "评分范围 1-10"
+        }
+    ]
+    }
+{% endschema %}

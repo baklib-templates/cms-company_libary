@@ -1,0 +1,97 @@
+{% assign pages = page.children_in_list | order_by: '-created_at' %}
+<a name="blog"></a>
+
+<!-- Hero -->
+<div class="relative py-16 lg:pt-24">
+  <div aria-hidden="true" class="absolute inset-0 h-max w-full m-auto grid grid-cols-2 -space-x-52 opacity-40 dark:opacity-20">
+    <div class="blur-[106px] h-56 bg-gradient-to-br from-primary to-secondary dark:from-blue-600"></div>
+    <div class="blur-[106px] h-32 bg-gradient-to-r from-secondary to-primary via-sky-300 dark:to-indigo-600"></div>
+  </div>
+  <Container>
+    <div class="relative px-4">
+      <div class="flex items-center justify-center -space-x-2">
+        <img loading="lazy" src="{{ 'images/avatars/avatar1.svg' | asset_url }}" alt="Baklib Avatar Icon" class="h-6 w-6 rounded-full object-cover p-1 bg-slate-200"/>
+        <img loading="lazy" src="{{ 'images/avatars/avatar2.svg' | asset_url }}" alt="Baklib Avatar Icon" class="h-8 w-8 rounded-full object-cover p-1 bg-slate-200"/>
+        <img loading="lazy" src="{{ 'images/avatars/avatar4.svg' | asset_url }}" alt="Baklib Avatar Icon" class="h-10 w-10 rounded-full object-cover p-1 bg-slate-200"/>
+        <img loading="lazy" src="{{ 'images/avatars/avatar3.svg' | asset_url }}" alt="Baklib Avatar Icon" class="h-12 w-12 rounded-full object-cover p-1 bg-slate-200"/>
+        <img loading="lazy" src="{{ 'images/avatars/avatar6.svg' | asset_url }}" alt="Baklib Avatar Icon" class="h-16 w-16 rounded-full object-cover p-1 bg-slate-200"/>
+        <img loading="lazy" src="{{ 'images/avatars/avatar5.svg' | asset_url }}" alt="Baklib Avatar Icon" class="h-12 w-12 rounded-full object-cover p-1 bg-slate-200"/>
+        <img loading="lazy" src="{{ 'images/avatars/avatar7.svg' | asset_url }}" alt="Baklib Avatar Icon" class="h-10 w-10 rounded-full object-cover p-1 bg-slate-200"/>
+        <img loading="lazy" src="{{ 'images/avatars/avatar8.svg' | asset_url }}" alt="Baklib Avatar Icon" class="h-8 w-8 rounded-full object-cover p-1 bg-slate-200"/>
+        <img loading="lazy" src="{{ 'images/avatars/avatar9.svg' | asset_url }}" alt="Baklib Avatar Icon" class="h-6 w-6 rounded-full object-cover p-1 bg-slate-200"/>
+      </div>
+      <div class="mt-6 m-auto space-y-6 md:w-8/12 lg:w-7/12">
+        <h1 class="text-center text-4xl font-bold text-gray-800 dark:text-white md:text-5xl">{{ page.link_text }}</h1>
+
+        <div class="flex flex-wrap justify-center gap-6">
+          {% form_tag 'search', class: 'w-full max-w-2xl' %}
+            <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+            <div class="relative">
+                <div class="absolute inset-y-0 start-0 flex items-center ps-6 pointer-events-none">
+                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                    </svg>
+                </div>
+                <input type="search" name="{{form.keywords_field_name}}" value="{{ search.keywords | escape_once }}" id="default-search" class="block w-full text-lg p-4 ps-12  text-gray-900 border border-gray-300 rounded-full bg-gray-50" placeholder="全站搜索..." required />
+                <button type="submit" class="text-white absolute end-[0.425rem] bottom-[0.425rem] bg-teal-600 hover:bg-teal-800 focus:outline-none font-medium rounded-full px-6 py-3 dark:bg-slate-800 dark:hover:bg-teal-600">搜索</button>
+            </div>
+          {% endform_tag %}
+        </div>
+        <!-- 热门标签 -->
+        <div class="flex flex-wrap justify-center gap-3">
+          <p class="">热门标签：</p>
+          {% for tag in page.settings.tags %}
+            <a
+              href="{{ tag.path }}"
+              data-turbo-frame="_top"
+              class="hover:text-primary focus:ring hover:-translate-y-[2px] min-w-12"
+            >
+              {{ tag.name }}
+            </a>
+          {% endfor %}
+        </div>
+
+      </div>
+    </div>
+  </Container>
+</div>
+
+
+<!-- Content Section -->
+<div class="px-4 mx-auto max-w-7xl md:px-0">
+  {%# 分页 %}
+  {% paginate_tag pages, per: 24 %}
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 md:gap-8">
+      {% for sub_page in pages %}
+        {% render 'page', page: sub_page, show_image: true %}
+      {% endfor %}
+    </div>
+    <!-- Pagination -->
+    <div class="w-full flex justify-center py-8">
+      {% render 'paginate', paginate: paginate %}
+    </div>
+  {% endpaginate_tag %}
+</div>
+
+
+{% schema %}
+  {
+    "name": "栏目",
+    "thumb_url": "images/theme/channel.png",
+    "description": "栏目页面",
+    "sub_page_templates": ["page"],
+    "settings": [
+      {
+        "id": "description",
+        "type": "textarea",
+        "label": "内容描述"
+      },
+      {
+        "id": "tags",
+        "type": "tag_picker",
+        "multiple": true,
+        "label": "标签"
+      }
+    ]
+  }
+{% endschema%}
