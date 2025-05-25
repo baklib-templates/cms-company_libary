@@ -1,0 +1,24 @@
+<article class="h-full flex flex-col bg-white transition-all duration-200 border border-gray-200 rounded-lg  hover:border-teal-600 hover:ring hover:ring-teal-600 hover:bg-teal-50 hover:-translate-y-1" data-aos="fade-up">
+    <!-- Image -->
+    {% if show_image %}
+        <a class="block group overflow-hidden rounded-t-lg" href="{{ page.path }}">
+            <img class="w-full rounded-t-lg aspect-[16/9] md:aspect-video object-cover group-hover:scale-105 transition duration-700 ease-out" src="{{ page.settings.thumb_image_url | default: site.settings.default_thumb }}"  alt="{{ page.link_text }} - Baklib" />
+        </a>
+    {% endif %}
+    <!-- Content -->
+    <div class="grow flex flex-col p-4">
+        <h3 class="text-xl font-black tracking-tight mb-3">
+            <a class=" hover:underline hover:decoration-primary-200" href="{{ page.path }}">{{ page.link_text }}</a>
+        </h3>
+        <p class="text-slate-500 grow line-clamp-3">{{ page.settings.description |  truncate: 120 }}</p>
+        <div class="flex items-center justify-between mt-4 text-xs">
+            <div class="flex items-center">
+                <img class="rounded-full shrink-0 mr-3" src="{{ page.author.avatar_url |  default: site.settings.default_avatar }}" width="32" height="32" />
+                <span class="font-medium text-slate-800">{{ page.author.name }}</span>
+            </div>
+            <div class="text-slate-500 flex items-center">
+                {{ page.published_at | date: '%Y-%m-%d' }}
+            </div>
+        </div>
+    </div>
+</article>

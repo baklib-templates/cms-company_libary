@@ -1,0 +1,55 @@
+{% assign pages = page.children_in_list | order_by: '-created_at' %}
+
+<!-- Hero -->
+<div class="mx-auto max-w-7xl my-8 px-4 sm:px-6 lg:px-8">
+  <ul class="list bg-base-100 rounded-box shadow-md">
+    <li class="p-4 pb-2 text-xs opacity-60 tracking-wide">{{ page.settings.description }}</li>
+    
+    {%# 分页 %}
+    {% paginate_tag pages, per: 24 %}
+      {% for sub_page in pages %}
+        <li class="list-row">
+          <div class="text-4xl font-thin opacity-30 tabular-nums">{{ forloop.index }}</div>
+          <div><img class="size-10 rounded-box" src="{{ sub_page.settings.icon_url }}"/></div>
+          <div class="list-col-grow">
+            <h2 class="text-md font-semibold">{{ sub_page.settings.title }}</h2>
+            <div class="text-xs uppercase font-semibold opacity-60">{{ sub_page.settings.company_name | default: '(未补充公司名)' }}</div>
+          </div>
+          <a class="btn btn-square btn-ghost" href="{{ sub_page.url }}">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+            </svg>
+          </a>
+        </li>
+      {% endfor %}
+      <!-- Pagination -->
+      <div class="w-full flex justify-center py-8">
+        {% render 'paginate', paginate: paginate %}
+      </div>
+    {% endpaginate_tag %}
+    
+  </ul>
+</div>
+
+
+{% schema %}
+  {
+    "name": "栏目List",
+    "thumb_url": "images/theme/channel.png",
+    "description": "栏目页面",
+    "sub_page_templates": ["page"],
+    "settings": [
+      {
+        "id": "description",
+        "type": "textarea",
+        "label": "内容描述"
+      },
+      {
+        "id": "tags",
+        "type": "tag_picker",
+        "multiple": true,
+        "label": "标签"
+      }
+    ]
+  }
+{% endschema%}

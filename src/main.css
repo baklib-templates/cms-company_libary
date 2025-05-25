@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 @config '../tailwind.config.js'
+@include 'apexcharts/dist/apexcharts.min'
 
 @layer base{
   /* generic css */

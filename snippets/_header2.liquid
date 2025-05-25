@@ -22,7 +22,14 @@
 
     <div class="navbar-center hidden lg:flex">
       <ul class="menu menu-horizontal text-base font-medium">
-       
+        {% for page in site.pages['/'].children_in_list %}
+        <li>
+          <a class={`hover:text-primary hover:bg-primary/5 transition flex ${pathname===item.href
+            ? "text-primary bg-primary/5" : "" }`} href="{{ page.path }}">
+            {{ page.link_text }}
+          </a>
+        </li>
+        {% endfor %}
       </ul>
     </div>
 

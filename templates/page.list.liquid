@@ -17,42 +17,12 @@
         <hr/>
         <div class="py-6">
           <div class="flex flex-col items-center">
+            
             {% if page.settings.logo_url %}
-              <div><img src="{{ page.settings.logo_url }}" alt="Logo" class=""></div>
+              <img src="{{ page.settings.logo_url }}" alt="Logo" class="">
             {% endif %}
-            <div class="text-center">
-              <h2 class="text-lg font-semibold text-gray-700">{{ page.settings.company_name }}</h2>
-              <p class="text-sm text-gray-500">{{ page.settings.description }}</p>
-              <div class="flex flex-wrap gap-2 mt-2">
-                {% if page.settings.region_tags %}
-                  {% for tag in page.settings.region_tags %}
-                    <a href="{{ tag.path }}"><span class="badge badge-outline">{{ tag.name }}</span></a>
-                  {% endfor %}
-                {% endif %}
-                {% if page.settings.country_tags %}
-                  {% for tag in page.settings.country_tags %}
-                    <a href="{{ tag.path }}"><span class="badge badge-outline">{{ tag.name }}</span></a>
-                  {% endfor %}
-                {% endif %}
-                {% if page.settings.industry_tags %}
-                  {% for tag in page.settings.industry_tags %}
-                    <a href="{{ tag.path }}"><span class="badge badge-outline">{{ tag.name }}</span></a>
-                  {% endfor %}
-                {% endif %}
-                {% if page.settings.product_tags %}
-                  {% for tag in page.settings.product_tags %}
-                    <a href="{{ tag.path }}"><span class="badge badge-outline">{{ tag.name }}</span></a>
-                  {% endfor %}
-                {% endif %}
-                {% if page.settings.category_tags %}
-                  {% for tag in page.settings.category_tags %}
-                    <a href="{{ tag.path }}"><span class="badge badge-outline">{{ tag.name }}</span></a>
-                  {% endfor %}
-                {% endif %}
-              </div>
           </div>
         </div>
-        <hr class="my-6" />
         <a href="{{ page.settings.domain }}" rel="noopener noreferrer" target="_blank"
           class="flex items-center py-0.5 text-gray-700 hover:text-indigo-700">{{ page.settings.domain }}
           <svg
@@ -61,41 +31,29 @@
             <path fill-rule="evenodd"
               d="M15.75 2.25H21a.75.75 0 0 1 .75.75v5.25a.75.75 0 0 1-1.5 0V4.81L8.03 17.03a.75.75 0 0 1-1.06-1.06L19.19 3.75h-3.44a.75.75 0 0 1 0-1.5Zm-10.5 4.5a1.5 1.5 0 0 0-1.5 1.5v10.5a1.5 1.5 0 0 0 1.5 1.5h10.5a1.5 1.5 0 0 0 1.5-1.5V10.5a.75.75 0 0 1 1.5 0v8.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V8.25a3 3 0 0 1 3-3h8.25a.75.75 0 0 1 0 1.5H5.25Z"
               clip-rule="evenodd"></path>
-          </svg>
-        </a>
+          </svg></a>
         
       </div>
     </nav>
     <main class="w-full md:pl-52">
       <div class="flex items-start">
         <div class="w-full max-w-[720px] lg:pr-12">
-
-          <div class="mb-4">
-            {% render 'breadcrumb', breadcrumb: page.breadcrumb %}
-          </div>
-
-          <div class="">
-            
+          <div class="prose prose-indigo max-w-none prose-h1:font-light prose-h1:text-indigo-700">
+            <p class="text-gray-500">{{ page.settings.description }}</p>
             <div class="mt-4">
               {% if page.settings.menus %}
                 <div class="flex flex-wrap gap-2">
-                  {% assign topics_menu = page.settings.menus | newline_to_br | split: '<br />' %}
-                  {% for menu in topics_menu %}
-                    <span class="badge badge-outline">{{ menu }}</span>
+                  {% for menu in page.settings.menus %}
+                    <a href="{{ menu.url }}" class="text-indigo-700 hover:text-indigo-900">{{ menu.name }}</a>
                   {% endfor %}
                 </div>
               {% endif %}
-            </div>
-
-            <p class="text-gray-500 my-4">{{ page.settings.description }}</p>
-
-            {% if page.settings.screenshot_url %}
-              <img src="{{ page.settings.screenshot_url }}" alt="Screenshot" class="w-full h-auto">
-            {% endif %}
-            
-            <div class="mt-4 ProseMirror prose prose-indigo max-w-none prose-h1:font-light prose-h1:text-indigo-700">
               {{ page.settings.content }}
             </div>
+            <div class="mt-4 ProseMirror">
+              {% if page.settings.screenshot_url %}
+                <img src="{{ page.settings.screenshot_url }}" alt="Screenshot" class="w-full h-auto">
+              {% endif %}
           </div>
         </div>
       </div>
@@ -107,8 +65,8 @@
 <!--/ article-->
 {% schema %}
     {
-    "name": "Page",
-    "thumb_url": "images/theme/page.webp",
+    "name": "Page List",
+    "thumb_url": "images/theme/page.png",
     "description": "公司/产品模板，固定的布局",
     "sub_page_templates": ["post"],
     "settings": [
@@ -125,13 +83,6 @@
           "placeholder": "",
           "label": "域名",
           "info": "https://example.com"
-        },
-        {
-          "id": "company_name",
-          "type": "text",
-          "placeholder": "",
-          "label": "公司名",
-          "info": "成都xx科技有限公司"
         },
         {
           "id": "description",

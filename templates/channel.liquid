@@ -9,17 +9,7 @@
   </div>
   <Container>
     <div class="relative px-4">
-      <div class="flex items-center justify-center -space-x-2">
-        <img loading="lazy" src="{{ 'images/avatars/avatar1.svg' | asset_url }}" alt="Baklib Avatar Icon" class="h-6 w-6 rounded-full object-cover p-1 bg-slate-200"/>
-        <img loading="lazy" src="{{ 'images/avatars/avatar2.svg' | asset_url }}" alt="Baklib Avatar Icon" class="h-8 w-8 rounded-full object-cover p-1 bg-slate-200"/>
-        <img loading="lazy" src="{{ 'images/avatars/avatar4.svg' | asset_url }}" alt="Baklib Avatar Icon" class="h-10 w-10 rounded-full object-cover p-1 bg-slate-200"/>
-        <img loading="lazy" src="{{ 'images/avatars/avatar3.svg' | asset_url }}" alt="Baklib Avatar Icon" class="h-12 w-12 rounded-full object-cover p-1 bg-slate-200"/>
-        <img loading="lazy" src="{{ 'images/avatars/avatar6.svg' | asset_url }}" alt="Baklib Avatar Icon" class="h-16 w-16 rounded-full object-cover p-1 bg-slate-200"/>
-        <img loading="lazy" src="{{ 'images/avatars/avatar5.svg' | asset_url }}" alt="Baklib Avatar Icon" class="h-12 w-12 rounded-full object-cover p-1 bg-slate-200"/>
-        <img loading="lazy" src="{{ 'images/avatars/avatar7.svg' | asset_url }}" alt="Baklib Avatar Icon" class="h-10 w-10 rounded-full object-cover p-1 bg-slate-200"/>
-        <img loading="lazy" src="{{ 'images/avatars/avatar8.svg' | asset_url }}" alt="Baklib Avatar Icon" class="h-8 w-8 rounded-full object-cover p-1 bg-slate-200"/>
-        <img loading="lazy" src="{{ 'images/avatars/avatar9.svg' | asset_url }}" alt="Baklib Avatar Icon" class="h-6 w-6 rounded-full object-cover p-1 bg-slate-200"/>
-      </div>
+
       <div class="mt-6 m-auto space-y-6 md:w-8/12 lg:w-7/12">
         <h1 class="text-center text-4xl font-bold text-gray-800 dark:text-white md:text-5xl">{{ page.link_text }}</h1>
 
@@ -77,9 +67,9 @@
 {% schema %}
   {
     "name": "栏目",
-    "thumb_url": "images/theme/channel.png",
+    "thumb_url": "images/theme/channel.webp",
     "description": "栏目页面",
-    "sub_page_templates": ["page"],
+    "sub_page_templates": ["channel", "page"],
     "settings": [
       {
         "id": "description",

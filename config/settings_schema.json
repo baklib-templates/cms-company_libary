@@ -11,9 +11,9 @@
     "theme_support_url": "https://help.baklib.cn/themes/company_libary/settings",
     "theme_thumb_url": "images/theme/thumb.png",
     "theme_preview_images": [
-      "images/theme/index.png",
-      "images/theme/examples.png",
-      "images/theme/page.png"
+      "images/theme/index.webp",
+      "images/theme/channel.webp",
+      "images/theme/page.webp"
     ],
     "theme_languages": [
       {
