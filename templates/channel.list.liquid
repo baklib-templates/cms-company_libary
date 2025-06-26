@@ -2,8 +2,17 @@
 
 <!-- Hero -->
 <div class="mx-auto max-w-7xl my-8 px-4 sm:px-6 lg:px-8">
-  <ul class="list bg-base-100 rounded-box shadow-md">
-    <li class="p-4 pb-2 text-xs opacity-60 tracking-wide">{{ page.settings.description }}</li>
+  <div class="p-4 pb-2 text-xs opacity-60 tracking-wide">{{ page.settings.description }}</div>
+  
+  <ul class="list bg-base-100 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    {%# 热门标签 %}
+    {% if page.settings.tags %}
+      <div class="col-span-full flex flex-wrap gap-2 mb-4">
+        {% for tag in page.settings.tags %}
+          <a href="{{ tag.path }}" class="badge badge-outline">{{ tag.name }}</a>
+        {% endfor %}
+      </div>
+    {% endif %}
     
     {%# 分页 %}
     {% paginate_tag pages, per: 24 %}
@@ -23,11 +32,10 @@
         </li>
       {% endfor %}
       <!-- Pagination -->
-      <div class="w-full flex justify-center py-8">
+      <li class="w-full flex justify-center py-8">
         {% render 'paginate', paginate: paginate %}
-      </div>
+      </li>
     {% endpaginate_tag %}
-    
   </ul>
 </div>
 

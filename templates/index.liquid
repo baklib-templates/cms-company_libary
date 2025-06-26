@@ -1,26 +1,31 @@
+{% assign company_china_list = site.pages['/china'].children_in_list | limit: 60 %}
+{% assign company_global_list = site.pages['/global'].children_in_list | limit: 60 %}
 
-<div
-  class="hero min-h-screen"
-  style="background-image: url({{ site.settings.hero_image_url }});"
->
+<div class="hero min-h-[320px]" style="background-image: url({{ site.settings.hero_image_url }});">
   <div class="hero-overlay"></div>
   <div class="hero-content text-neutral-content text-center">
-    <div class="max-w-md">
-      <h1 class="mb-5 text-5xl font-bold">B2B 软件库</h1>
+    <div class="max-w-4xl">
+      <h1 class="mb-5 text-2xl lg:text-4xl font-bold">{{ site.settings.title }}</h1>
       <p class="mb-5">
-        本平台用于收录和分享 B2B 软件的使用经验和技巧，帮助用户更好地了解和使用这些软件。
+        {{ site.settings.description | escape_once }}
       </p>
       <div class="flex flex-wrap justify-center gap-6">
-        {% form_tag 'search', class: 'w-full max-w-2xl' %}
+        {% form_tag 'search', class: 'w-full max-w-3xl' %}
           <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
           <div class="relative">
-              <div class="absolute inset-y-0 start-0 flex items-center ps-6 pointer-events-none">
-                  <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-                  </svg>
-              </div>
-              <input type="search" name="{{form.keywords_field_name}}" value="{{ search.keywords | escape_once }}" id="default-search" class="block w-full text-lg p-4 ps-12  text-gray-900 border border-gray-300 rounded-full bg-gray-50" placeholder="全站搜索..." required />
-              <button type="submit" class="text-white absolute end-[0.425rem] bottom-[0.425rem] bg-teal-600 hover:bg-teal-800 focus:outline-none font-medium rounded-full px-6 py-3 dark:bg-slate-800 dark:hover:bg-teal-600">搜索</button>
+            <div class="absolute inset-y-0 start-0 flex items-center ps-6 pointer-events-none">
+              <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                fill="none" viewBox="0 0 20 20">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+              </svg>
+            </div>
+            <input type="search" name="{{form.keywords_field_name}}" value="{{ search.keywords | escape_once }}"
+              id="default-search"
+              class="block w-full text-lg p-4 ps-12  text-gray-900 border border-gray-300 rounded-full bg-gray-50"
+              placeholder="全站搜索..." required />
+            <button type="submit"
+              class="text-white absolute end-[0.425rem] bottom-[0.425rem] bg-teal-600 hover:bg-teal-800 focus:outline-none font-medium rounded-full px-6 py-3 dark:bg-slate-800 dark:hover:bg-teal-600">搜索</button>
           </div>
         {% endform_tag %}
       </div>
@@ -28,51 +33,60 @@
       <div class="flex flex-wrap justify-center gap-3">
         <p class="">热门标签：</p>
         {% for tag in page.settings.tags %}
-          <a
-            href="{{ tag.path }}"
-            data-turbo-frame="_top"
-            class="hover:text-primary focus:ring hover:-translate-y-[2px] min-w-12"
-          >
-            {{ tag.name }}
-          </a>
+        <a href="{{ tag.path }}" data-turbo-frame="_top"
+          class="hover:text-primary focus:ring hover:-translate-y-[2px] min-w-12">
+          {{ tag.name }}
+        </a>
         {% endfor %}
       </div>
-
     </div>
+  </div>
+</div>
+<!-- End Hero -->
+
+<!-- 国内公司列表 -->
+<div class="max-w-7xl mx-auto">
+  <h2 class="text-xl lg:text-2xl font-bold my-8">国内公司列表</h2>
+  <div class="grid grid-cols-4 md:grid-cols-12 gap-4">
+    {% for sub_page in company_china_list %}
+        <div class="card bg-base-100">
+          <a href="{{ sub_page.url }}" class="card-body">
+            <img class="size-10 rounded-box" src="{{ sub_page.settings.icon_url }}" alt="{{ sub_page.settings.title }}">
+          </a>
+        </div>
+    {% endfor %}  
+  </div>
+</div>
+
+<!-- 国外公司列表 -->
+<div class="max-w-7xl mx-auto">
+  <h2 class="text-xl lg:text-2xl font-bold my-8">国外公司列表</h2>
+  <div class="grid grid-cols-4 lg:grid-cols-12 gap-4">
+    {% for sub_page in company_global_list %}
+        <div class="card bg-base-100">
+          <a href="{{ sub_page.url }}" class="card-body">
+            <img class="size-10 rounded-box" src="{{ sub_page.settings.icon_url }}" alt="{{ sub_page.settings.title }}">
+          </a>
+        </div>
+    {% endfor %}  
   </div>
 </div>
 
 <div class="max-w-7xl mx-auto">
 
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 my-12">
-    <article class="prose">
-      <h1>什么是 Daisy UI?</h1>
-      <p>
-        For years parents have espoused the health benefits of eating garlic bread with cheese to their
-        children, with the food earning such an iconic status in our culture that kids will often dress
-        up as warm, cheesy loaf for Halloween.
-      </p>
-
-      <p>
-        But a recent study shows that the celebrated appetizer may be linked to a series of rabies cases
-        springing up around the country.
-      </p>
-      <!-- ... -->
-    </article>
-    <article class="prose">
-      <h1>什么是 Baklib?</h1>
-      <p>
-        For years parents have espoused the health benefits of eating garlic bread with cheese to their
-        children, with the food earning such an iconic status in our culture that kids will often dress
-        up as warm, cheesy loaf for Halloween.
-      </p>
-
-      <p>
-        But a recent study shows that the celebrated appetizer may be linked to a series of rabies cases
-        springing up around the country.
-      </p>
-      <!-- ... -->
-    </article>
+    <div class="card card-dash bg-base-100 shadow-md">
+      <div class="card-body">
+        <h2 class="card-title">{{ page.settings.section_title_one }}</h2>
+        {{ page.settings.section_content_one }}
+      </div>
+    </div>
+    <div class="card card-dash bg-base-100 shadow-md">
+      <div class="card-body">
+        <h2 class="card-title">{{ page.settings.section_title_two }}</h2>
+        {{ page.settings.section_content_two }}
+      </div>
+    </div>
   </div>
 
 </div>
@@ -82,11 +96,37 @@
     "name": "首页",
     "thumb_url": "images/theme/index.png",
     "preview_image_urls": [
-        "images/theme/index.png"
+    "images/theme/index.png"
     ],
     "description": "Help Center, Customer Support",
     "sub_page_templates": [
-        "channel"
+      "channel"
+    ],
+    "settings": [
+        {
+          "id": "section_title_one",
+          "type": "text",
+          "label": "标题1",
+          "info": "显示在正文上方的文章标题"
+        },
+        {
+          "id": "section_content_one",
+          "type": "richtext",
+          "label": "标题 1 描述",
+          "info": "简短描述"
+        },
+        {
+          "id": "section_title_two",
+          "type": "text",
+          "label": "标题2",
+          "info": "显示在正文上方的文章标题"
+        },
+        {
+          "id": "section_content_two",
+          "type": "richtext",
+          "label": "标题 2 描述",
+          "info": "简短描述"
+        }
     ]
   }
 {% endschema %}

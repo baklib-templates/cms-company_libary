@@ -100,9 +100,15 @@
         "info": "t:settings_schema.generic.settings.hero_image_url.info"
       },
       {
+        "id": "title",
+        "type": "text",
+        "label": "网站标题",
+        "default": "Welcome to Our Site"
+      },
+      {
         "id": "description",
         "type": "text",
-        "label": "t:settings_schema.generic.settings.description.label",
+        "label": "网站描述",
         "default": "👋 What Can We Help?"
       },
       {

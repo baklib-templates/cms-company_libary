@@ -3,7 +3,8 @@
 
 <!-- Hero -->
 <div class="relative py-16 lg:pt-24">
-  <div aria-hidden="true" class="absolute inset-0 h-max w-full m-auto grid grid-cols-2 -space-x-52 opacity-40 dark:opacity-20">
+  <div aria-hidden="true"
+    class="absolute inset-0 h-max w-full m-auto grid grid-cols-2 -space-x-52 opacity-40 dark:opacity-20">
     <div class="blur-[106px] h-56 bg-gradient-to-br from-primary to-secondary dark:from-blue-600"></div>
     <div class="blur-[106px] h-32 bg-gradient-to-r from-secondary to-primary via-sky-300 dark:to-indigo-600"></div>
   </div>
@@ -15,29 +16,33 @@
 
         <div class="flex flex-wrap justify-center gap-6">
           {% form_tag 'search', class: 'w-full max-w-2xl' %}
-            <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
-            <div class="relative">
-                <div class="absolute inset-y-0 start-0 flex items-center ps-6 pointer-events-none">
-                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-                    </svg>
-                </div>
-                <input type="search" name="{{form.keywords_field_name}}" value="{{ search.keywords | escape_once }}" id="default-search" class="block w-full text-lg p-4 ps-12  text-gray-900 border border-gray-300 rounded-full bg-gray-50" placeholder="全站搜索..." required />
-                <button type="submit" class="text-white absolute end-[0.425rem] bottom-[0.425rem] bg-teal-600 hover:bg-teal-800 focus:outline-none font-medium rounded-full px-6 py-3 dark:bg-slate-800 dark:hover:bg-teal-600">搜索</button>
+          <label for="default-search"
+            class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+          <div class="relative">
+            <div class="absolute inset-y-0 start-0 flex items-center ps-6 pointer-events-none">
+              <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+              </svg>
             </div>
+            <input type="search" name="{{form.keywords_field_name}}" value="{{ search.keywords | escape_once }}"
+              id="default-search"
+              class="block w-full text-lg p-4 ps-12  text-gray-900 border border-gray-300 rounded-full bg-gray-50"
+              placeholder="全站搜索..." required />
+            <button type="submit"
+              class="text-white absolute end-[0.425rem] bottom-[0.425rem] bg-teal-600 hover:bg-teal-800 focus:outline-none font-medium rounded-full px-6 py-3 dark:bg-slate-800 dark:hover:bg-teal-600">搜索</button>
+          </div>
           {% endform_tag %}
         </div>
         <!-- 热门标签 -->
         <div class="flex flex-wrap justify-center gap-3">
           <p class="">热门标签：</p>
           {% for tag in page.settings.tags %}
-            <a
-              href="{{ tag.path }}"
-              data-turbo-frame="_top"
-              class="hover:text-primary focus:ring hover:-translate-y-[2px] min-w-12"
-            >
-              {{ tag.name }}
-            </a>
+          <a href="{{ tag.path }}" data-turbo-frame="_top"
+            class="hover:text-primary focus:ring hover:-translate-y-[2px] min-w-12">
+            {{ tag.name }}
+          </a>
           {% endfor %}
         </div>
 
@@ -51,37 +56,37 @@
 <div class="px-4 mx-auto max-w-7xl md:px-0">
   {%# 分页 %}
   {% paginate_tag pages, per: 24 %}
-    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 md:gap-8">
-      {% for sub_page in pages %}
-        {% render 'page', page: sub_page, show_image: true %}
-      {% endfor %}
-    </div>
-    <!-- Pagination -->
-    <div class="w-full flex justify-center py-8">
-      {% render 'paginate', paginate: paginate %}
-    </div>
+  <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 md:gap-8">
+    {% for sub_page in pages %}
+    {% render 'page', page: sub_page, show_image: true %}
+    {% endfor %}
+  </div>
+  <!-- Pagination -->
+  <div class="w-full flex justify-center py-8">
+    {% render 'paginate', paginate: paginate %}
+  </div>
   {% endpaginate_tag %}
 </div>
 
 
 {% schema %}
-  {
-    "name": "栏目",
-    "thumb_url": "images/theme/channel.webp",
-    "description": "栏目页面",
-    "sub_page_templates": ["channel", "page"],
-    "settings": [
-      {
-        "id": "description",
-        "type": "textarea",
-        "label": "内容描述"
-      },
-      {
-        "id": "tags",
-        "type": "tag_picker",
-        "multiple": true,
-        "label": "标签"
-      }
-    ]
-  }
+{
+"name": "栏目",
+"thumb_url": "images/theme/channel.webp",
+"description": "栏目页面",
+"sub_page_templates": ["channel", "page"],
+"settings": [
+{
+"id": "description",
+"type": "textarea",
+"label": "内容描述"
+},
+{
+"id": "tags",
+"type": "tag_picker",
+"multiple": true,
+"label": "标签"
+}
+]
+}
 {% endschema%}
